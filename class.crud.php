@@ -19,7 +19,7 @@ return $stmt->execute();
 	
 	public function getID($id)  // return les informations de l'utilisateur qui est équivalant à l'id entré aux paramétre. 
 	{
-		$stmt = $this->db->prepare("SELECT * FROM tbl_users WHERE id=?");
+		$stmt = $this->db->prepare("SELECT * FROM Driver WHERE DRIVER_ID=?");
         $stmt->bind_param("i", $id);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -27,26 +27,29 @@ return $stmt->execute();
 	}
 
 	// modification d'un utilisateur avec tous les champs.
-	public function update($id,$fname,$lname,$email,$contact)
+	public function update($DRIVER_ID,$AGE,$INCOME,$MSTATUS,$GENDER, $EDUCATION, $OCCUPATION)
 	{
-		$stmt = $this->db->prepare("UPDATE tbl_users SET first_name=?, 
-                                                        last_name=?, 
-                                                        email_id=?, 
-                                                        contact_no=?
-                                    WHERE id=?");
-        $stmt->bind_param("ssssi", $fname, $lname, $email, $contact, $id);
+		$stmt = $this->db->prepare("UPDATE Driver SET KIDSDRIV=?, 
+                                                        AGE=?, 
+                                                        INCOME=?, 
+                                                        MSTATUS=?
+														GENDER=?
+														EDUCATION=?
+														OCCUPATION=?
+                                    WHERE DRIVER_ID=?");
+        $stmt->bind_param("ssssi", $AGE, $INCOME, $MSTATUS, $GENDER, $EDUCATION, $OCCUPATION, $DRIVER_ID);
         return $stmt->execute();
 	}
 	
 	public function delete($id) // suppression d'un utilisateur par l'id.
 	{
-		$stmt = $this->db->prepare("DELETE FROM tbl_users WHERE id=?");
+		$stmt = $this->db->prepare("DELETE FROM Driver WHERE DRIVER_ID=?");
         $stmt->bind_param("i", $id);
-        return $stmt->execute();// toujoure on retourne true or false pour 
-	}                // l'utiliation aprés dans les autres pages.
+        return $stmt->execute();
+	}                
 	
 		
-	public function dataview($query) // l'affichage des données, on passe en paramétre une requete.
+	public function dataview($query) 
 	{
 		$result = $this->db->query($query);
 
@@ -54,21 +57,21 @@ return $stmt->execute();
             while ($row = $result->fetch_assoc()) {
                 ?>
                 <tr>
-                    <td><?php echo $row['ID']; ?></td>
+                    <td><?php echo $row['DRIVER_ID']; ?></td>
                     <td><?php echo $row['KIDSDRIV']; ?></td>
                     <td><?php echo $row['AGE']; ?></td>
                     <td><?php echo $row['INCOME']; ?></td>
                     <td><?php echo $row['MSTATUS']; ?></td>
 					<td><?php echo $row['GENDER']; ?></td>
-					<td><?php echo $row['MSTATUS']; ?></td>
-					<td><?php echo $row['MSTATUS']; ?></td>
+					<td><?php echo htmlspecialchars($row['EDUCATION']); ?></td>
+					<td><?php echo $row['OCCUPATION']; ?></td>
                     <td align="center">
-						<a href="edit-data.php?edit_id=<?php echo $row['id']; ?>" class="btn btn-warning">
+						<a href="edit-data.php?edit_id=<?php echo $row['DRIVER_ID']; ?>" class="btn btn-warning">
 							<i class="glyphicon glyphicon-edit"></i> Edit
 						</a>
 					</td>
 					<td align="center">
-						<a href="delete.php?delete_id=<?php echo $row['id']; ?>" class="btn btn-danger">
+						<a href="delete.php?delete_id=<?php echo $row['DRIVER_ID']; ?>" class="btn btn-danger">
 							<i class="glyphicon glyphicon-remove-circle"></i> Delete
 						</a>
 					</td>

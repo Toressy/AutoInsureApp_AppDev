@@ -30,7 +30,7 @@
             <th colspan="2" align="center">Actions</th>
         </tr>
         <?php    
-		  $crud->dataview("SELECT * FROM tbl_users"); // l'appele du méthode d'affichage.
+		  $crud->dataview("SELECT * FROM Driver"); // l'appele du méthode d'affichage.
 	    ?>
     </table> 
 </div>
