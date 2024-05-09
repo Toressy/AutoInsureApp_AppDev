@@ -2,13 +2,16 @@
 include_once 'dbconfig.php';
 
 if(isset($_POST['btn-update'])) {
-    $id = $_GET['edit_id'];
-    $fname = $_POST['first_name'];
-    $lname = $_POST['last_name'];
-    $email = $_POST['email_id'];
-    $contact = $_POST['contact_no'];
+    $DRIVER_ID = $_GET['edit_id'];
+    $KIDSDRIV = $_POST['KIDSDRIV'];
+    $AGE = $_POST['AGE'];
+    $INCOME = $_POST['INCOME'];
+    $MSTATUS = $_POST['MSTATUS'];
+    $GENDER = $_POST['GENDER'];
+    $EDUCATION = $_POST['EDUCATION'];
+    $OCCUPATION = $_POST['OCCUPATION'];
 
-    if($crud->update($id, $fname, $lname, $email, $contact)) {
+    if($crud->update($DRIVER_ID, $KIDSDRIV, $AGE, $INCOME, $MSTATUS, $GENDER, $EDUCATION, $OCCUPATION)) {
         $msg = "<div class='alert alert-info'>
                 Modification successful
                 </div>";
@@ -20,12 +23,14 @@ if(isset($_POST['btn-update'])) {
 }
 
 if(isset($_GET['edit_id'])) {
-    $id = $_GET['edit_id'];
-    $user = $crud->getID($id);
-    $first_name = $user['first_name'];
-    $last_name = $user['last_name'];
-    $email_id = $user['email_id'];
-    $contact_no = $user['contact_no'];
+    $DRIVER_ID = $_GET['edit_id'];
+    $KIDSDRIVE = $crud->getID($id);
+    $AGE = $user['AGE'];
+    $INCOME = $user['INCOME'];
+    $MSTATUS = $user['MSTATUS'];
+    $GENDER = $user['GENDER'];
+    $EDUCATION = $user['EDUCATION'];
+    $OCCUPATION = $user['OCCUPATION'];
 }
 
 include_once 'header.php';
