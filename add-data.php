@@ -2,11 +2,15 @@
 include_once 'dbconfig.php';
 
 if(isset($_POST['btn-save'])){
-	$fname = $_POST['first_name'];
-	$lname = $_POST['last_name'];
-	$email = $_POST['email_id'];
-	$contact = $_POST['contact_no'];
-	if($crud->create($fname, $lname, $email, $contact)){
+    $DRIVER_ID = $_POST['DRIVER_ID'];
+    $KIDSDRIV = $_POST['KIDSDRIV'];
+    $AGE = $_POST['AGE'];
+	$INCOME = $_POST['INCOME'];
+	$MSTATUS = $_POST['MSTATUS'];
+	$GENDER = $_POST['GENDER'];
+	$EDUCATION = $_POST['EDUCATION'];
+    $OCCUPATION = $_POST['OCCUPATION'];
+	if($crud->create($DRIVER_ID, $KIDSDRIV, $AGE, $INCOME, $MSTATUS, $GENDER, $EDUCATION, $OCCUPATION)){
 		header("Location: add-data.php?inserted");
 		exit();
 	} else {
@@ -41,21 +45,35 @@ if(isset($_GET['inserted'])){
 	<form method='post'>
     <table class='table table-bordered'>
         <tr>
-            <td>Nom</td><td><input type='text' name='first_name' class='form-control' required></td>
+            <td>ID</td><td><input type='text' name='DRIVER_ID' class='form-control' required></td>
         </tr>
         <tr>
-            <td>Prénom</td><td><input type='text' name='last_name' class='form-control' required></td>
+            <td>KIDSDRIV</td><td><input type='text' name='KIDSDRIV' class='form-control' required></td>
+        </tr>
+
+        <tr>
+            <td>AGE</td><td><input type='text' name='AGE' class='form-control' required></td>
         </tr>
         <tr>
-            <td>E-mail</td><td><input type='text' name='email_id' class='form-control' required></td>
+            <td>INCOME</td><td><input type='text' name='INCOME' class='form-control' required></td>
         </tr>
         <tr>
-            <td>Téléphone</td><td><input type='text' name='contact_no' class='form-control' required></td>
+            <td>MSTATUS</td><td><input type='text' name='MSTATUS' class='form-control' required></td>
+        </tr>
+
+        <tr>
+            <td>GENDER</td><td><input type='text' name='GENDER' class='form-control' required></td>
+        </tr>
+        <tr>
+            <td>EDUCATION</td><td><input type='text' name='EDUCATION' class='form-control' required></td>
+        </tr>
+        <tr>
+            <td>OCCUPATION</td><td><input type='text' name='OCCUPATION' class='form-control' required></td>
         </tr>
         <tr>
             <td colspan="2">
             <button type="submit" class="btn btn-primary" name="btn-save">
-            <span class="glyphicon glyphicon-plus"></span> Add user</button>
+            <span class="glyphicon glyphicon-plus"></span> Add driver</button>
             <a href="index.php" class="btn btn-large btn-success" style="float: right;">
             <i class="glyphicon glyphicon-backward"></i> &nbsp; Back to menu</a>
             </td>

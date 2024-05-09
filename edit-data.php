@@ -24,13 +24,14 @@ if(isset($_POST['btn-update'])) {
 
 if(isset($_GET['edit_id'])) {
     $DRIVER_ID = $_GET['edit_id'];
-    $KIDSDRIVE = $crud->getID($id);
-    $AGE = $user['AGE'];
-    $INCOME = $user['INCOME'];
-    $MSTATUS = $user['MSTATUS'];
-    $GENDER = $user['GENDER'];
-    $EDUCATION = $user['EDUCATION'];
-    $OCCUPATION = $user['OCCUPATION'];
+    $driver = $crud->getID($DRIVER_ID);
+    $KIDSDRIV = $driver['KIDSDRIV'];
+    $AGE = $driver['AGE'];
+    $INCOME = $driver['INCOME'];
+    $MSTATUS = $driver['MSTATUS'];
+    $GENDER = $driver['GENDER'];
+    $EDUCATION = $driver['EDUCATION'];
+    $OCCUPATION = $driver['OCCUPATION'];
 }
 
 include_once 'header.php';
@@ -48,29 +49,44 @@ include_once 'header.php';
     <form method='post'>
         <table class='table table-bordered'>
             <tr>
-                <td>Nom</td>
-                <td><input type='text' name='first_name' class='form-control' value="<?php echo $first_name; ?>" required></td>
+                <td>KIDSDRIVE</td>
+                <td><input type='text' name='KIDSDRIV' class='form-control' value="<?php echo $KIDSDRIV; ?>" required></td>
             </tr>
     
             <tr>
-                <td>Prénom</td>
-                <td><input type='text' name='last_name' class='form-control' value="<?php echo $last_name; ?>" required></td>
+                <td>AGE</td>
+                <td><input type='text' name='AGE' class='form-control' value="<?php echo $AGE; ?>" required></td>
             </tr>
     
             <tr>
-                <td>E-mail</td>
-                <td><input type='text' name='email_id' class='form-control' value="<?php echo $email_id; ?>" required></td>
+                <td>INCOME</td>
+                <td><input type='text' name='INCOME' class='form-control' value="<?php echo $INCOME; ?>" required></td>
             </tr>
     
             <tr>
-                <td>Tél</td>
-                <td><input type='text' name='contact_no' class='form-control' value="<?php echo $contact_no; ?>" required></td>
+                <td>MSTATUS</td>
+                <td><input type='text' name='MSTATUS' class='form-control' value="<?php echo $MSTATUS; ?>" required></td>
+            </tr>
+
+            <tr>
+                <td>GENDER</td>
+                <td><input type='text' name='GENDER' class='form-control' value="<?php echo $GENDER; ?>" required></td>
+            </tr>
+
+            <tr>
+                <td>EDUCATION</td>
+                <td><input type='text' name='EDUCATION' class='form-control' value="<?php echo $EDUCATION; ?>" required></td>
+            </tr>
+
+            <tr>
+                <td>OCCUPATION</td>
+                <td><input type='text' name='OCCUPATION' class='form-control' value="<?php echo $OCCUPATION; ?>" required></td>
             </tr>
     
             <tr>
                 <td colspan="2">
                     <button type="submit" class="btn btn-primary" name="btn-update">
-                    <span class="glyphicon glyphicon-edit"></span>  Edit user
+                    <span class="glyphicon glyphicon-edit"></span>  Edit driver
                     </button>
                     <a href="index.php" class="btn btn-large btn-success" style="float: right;"><i class="glyphicon glyphicon-backward"></i> &nbsp; Cancel </a>
                 </td>

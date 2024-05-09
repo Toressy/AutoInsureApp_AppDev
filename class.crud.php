@@ -1,6 +1,6 @@
 <?php
 
-class crud // la class des operations avec la base de données.
+class crud 
 {
 	private $db;
 	
@@ -9,42 +9,42 @@ class crud // la class des operations avec la base de données.
 		$this->db = $mysqli;
 	}
 	
-	public function create($fname,$lname,$email,$contact) // methode d'insertion des données.
+	public function create($DRIVER_ID, $KIDSDRIV,$AGE,$INCOME,$MSTATUS, $GENDER, $EDUCATION, $OCCUPATION) 
 	{
-		$stmt = $this->db->prepare("INSERT INTO tbl_users(first_name,last_name,email_id,contact_no) 
-		VALUES(?, ?, ?, ?)");
-$stmt->bind_param("ssss", $fname, $lname, $email, $contact);
+		$stmt = $this->db->prepare("INSERT INTO Driver(DRIVER_ID, KIDSDRIV, AGE, INCOME, MSTATUS, GENDER, EDUCATION, OCCUPATION) 
+		VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
+$stmt->bind_param("iiisssss", $DRIVER_ID, $KIDSDRIV, $AGE, $INCOME, $MSTATUS, $GENDER, $EDUCATION, $OCCUPATION);
 return $stmt->execute();
 	}
 	
-	public function getID($id)  // return les informations de l'utilisateur qui est équivalant à l'id entré aux paramétre. 
+	public function getID($DRIVER_ID)  
 	{
 		$stmt = $this->db->prepare("SELECT * FROM Driver WHERE DRIVER_ID=?");
-        $stmt->bind_param("i", $id);
+        $stmt->bind_param("i", $DRIVER_ID);
         $stmt->execute();
         $result = $stmt->get_result();
         return $result->fetch_assoc();
 	}
 
-	// modification d'un utilisateur avec tous les champs.
-	public function update($DRIVER_ID,$AGE,$INCOME,$MSTATUS,$GENDER, $EDUCATION, $OCCUPATION)
+	
+	public function update($DRIVER_ID,$KIDSDRIV, $AGE,$INCOME,$MSTATUS,$GENDER, $EDUCATION, $OCCUPATION)
 	{
 		$stmt = $this->db->prepare("UPDATE Driver SET KIDSDRIV=?, 
                                                         AGE=?, 
                                                         INCOME=?, 
-                                                        MSTATUS=?
-														GENDER=?
-														EDUCATION=?
+                                                        MSTATUS=?,
+														GENDER=?,
+														EDUCATION=?,
 														OCCUPATION=?
                                     WHERE DRIVER_ID=?");
-        $stmt->bind_param("ssssi", $AGE, $INCOME, $MSTATUS, $GENDER, $EDUCATION, $OCCUPATION, $DRIVER_ID);
+        $stmt->bind_param("iisssssi", $KIDSDRIV, $AGE, $INCOME, $MSTATUS, $GENDER, $EDUCATION, $OCCUPATION, $DRIVER_ID);
         return $stmt->execute();
 	}
 	
-	public function delete($id) // suppression d'un utilisateur par l'id.
+	public function delete($DRIVER_ID) 
 	{
 		$stmt = $this->db->prepare("DELETE FROM Driver WHERE DRIVER_ID=?");
-        $stmt->bind_param("i", $id);
+        $stmt->bind_param("i", $DRIVER_ID);
         return $stmt->execute();
 	}                
 	
@@ -81,7 +81,7 @@ return $stmt->execute();
         } else {
             ?>
             <tr>
-                <td colspan="7">No users found...</td>
+                <td colspan="7">No driver found...</td>
             </tr>
             <?php
         }
