@@ -11,6 +11,11 @@ class crud
 	
 	public function create($DRIVER_ID, $KIDSDRIV,$AGE,$INCOME,$MSTATUS, $GENDER, $EDUCATION, $OCCUPATION) 
 	{
+		$existingDriver = $this->getID($DRIVER_ID);
+
+        if ($existingDriver) {
+            return false;
+        }
 		$stmt = $this->db->prepare("INSERT INTO Driver(DRIVER_ID, KIDSDRIV, AGE, INCOME, MSTATUS, GENDER, EDUCATION, OCCUPATION) 
 		VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
 		$stmt->bind_param("iiisssss", $DRIVER_ID, $KIDSDRIV, $AGE, $INCOME, $MSTATUS, $GENDER, $EDUCATION, $OCCUPATION);
@@ -22,6 +27,14 @@ class crud
 		$stmt = $this->db->prepare("INSERT INTO Car (DRIVER_ID, CAR_TYPE, RED_CAR, CAR_AGE) 
 		VALUES(?, ?, ?, ?)");
 		$stmt->bind_param("issi", $DRIVER_ID, $CAR_TYPE, $RED_CAR, $CAR_AGE);
+		return $stmt->execute();
+	}
+
+	public function createClaim($CAR_ID, $OLDCLAIM ,$CLM_FREQ, $CLM_AMT, $CLAIM_FLAG) 
+	{
+		$stmt = $this->db->prepare("INSERT INTO Claim (CAR_ID, OLDCLAIM, CLM_FREQ, CLM_AMT, CLAIM_FLAG) 
+		VALUES(?, ?, ?, ?, ?)");
+		$stmt->bind_param("isisi", $CAR_ID, $OLDCLAIM, $CLM_FREQ, $CLM_AMT, $CLAIM_FLAG);
 		return $stmt->execute();
 	}
 
@@ -47,6 +60,15 @@ class crud
 
 	}
 
+	public function getClaimByCarId($CAR_ID){
+		$stmt = $this->db->prepare("SELECT * FROM Claim WHERE CAR_ID=?");
+        $stmt->bind_param("i", $CAR_ID);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result->fetch_assoc();
+	}
+
 	public function getCarByDriverId($DRIVER_ID) {
 	
 		$stmt = $this->db->prepare("SELECT * FROM Car WHERE DRIVER_ID=?");
@@ -62,6 +84,25 @@ class crud
 		
 		return $cars;
 	}
+
+	public function getDataForAgeCohorts()
+    {
+        $query = "SELECT d.AGE, c.CLM_FREQ, c.CLM_AMT 
+		FROM Driver d 
+		INNER JOIN Car car ON d.DRIVER_ID = car.DRIVER_ID 
+		INNER JOIN Claim c ON car.CAR_ID = c.CAR_ID";
+        $result = $this->db->query($query);
+
+        $data = array();
+
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $data[] = $row;
+            }
+        }
+
+        return $data;
+    }
 
 	public function getAllDrivers() {
 		$query = "SELECT * FROM Driver";
@@ -109,6 +150,18 @@ class crud
         $stmt->bind_param("issii", $DRIVER_ID, $CAR_TYPE, $RED_CAR, $CAR_AGE, $CAR_ID);
         return $stmt->execute();
 	}
+
+	public function updateClaim($CAR_ID, $OLDCLAIM, $CLM_FREQ,$CLM_AMT,$CLAIM_FLAG)
+	{
+		$stmt = $this->db->prepare("UPDATE Claim SET OLDCLAIM=?, 
+                                                        CLM_FREQ=?, 
+                                                        CLM_AMT=?, 
+                                                        CLAIM_FLAG=?
+														
+                                    WHERE CAR_ID=?");
+        $stmt->bind_param("sisii", $OLDCLAIM, $CLM_FREQ, $CLM_AMT, $CLAIM_FLAG, $CAR_ID);
+        return $stmt->execute();
+	}
 	
 	public function delete($DRIVER_ID) 
 	{
@@ -133,6 +186,12 @@ class crud
 	
 		return $result; // Return the result of the deletion operation
 	}    
+
+	public function deleteClaim($CAR_ID){
+		$stmt = $this->db->prepare("DELETE FROM Claim WHERE CAR_ID=?");
+		$stmt->bind_param("i", $CAR_ID);
+		return $stmt->execute();
+	}
 	
 	
 	public function dataview($query) 
@@ -179,6 +238,25 @@ class crud
         }
 	}	
 
+	public function displayClaimDetails($CAR_ID)
+{
+    $claim = $this->getClaimByCarId($CAR_ID);
+
+    if ($claim) {
+        echo "<table class='table table-bordered'>";
+        echo "<tr><th>Claim ID</th><th>Old Claim</th><th>Claim Frequency</th><th>Claim Amount</th><th>Claim Flag</th></tr>";
+        echo "<tr>";
+        echo "<td>" . $claim['CLAIM_ID'] . "</td>";
+        echo "<td>" . $claim['OLDCLAIM'] . "</td>";
+        echo "<td>" . $claim['CLM_FREQ'] . "</td>";
+        echo "<td>" . $claim['CLM_AMT'] . "</td>";
+        echo "<td>" . $claim['CLAIM_FLAG'] . "</td>";
+        echo "</tr>";
+        echo "</table>";
+    } else {
+        echo "No claims found for this car.";
+    }
+}
 
 }
 ?>

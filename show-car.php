@@ -1,10 +1,8 @@
 <?php 
 
 include_once 'dbconfig.php';
-
-
-
 include_once 'header.php';
+
 ?>
 
 <div class="container">
@@ -28,36 +26,41 @@ include_once 'header.php';
                 <th>Red?</th>
                 <th>Age</th>
                 <th colspan="2" align="center">Actions</th>
+                <th>Claim</th>
                 
             </tr>
             <?php
-                foreach($cars as $car) { // Loop through each car
+                foreach($cars as $car) { 
                     ?>
-            <tr>
-                <td><?php echo $car['CAR_ID']; ?></td>
-                <td><?php echo $car['DRIVER_ID']; ?></td>
-                <td><?php echo $car['CAR_TYPE']; ?></td>
-                <td><?php echo $car['RED_CAR']; ?></td>
-                <td><?php echo $car['CAR_AGE']; ?></td>
-                <td align="center">
-                    <a href="edit-car.php?edit_id=<?php echo $car['CAR_ID']; ?>" class="btn btn-warning">
-                        <i class="glyphicon glyphicon-edit"></i> Edit
-                    </a>
-                </td>
-                <td align="center">
-                    <a href="delete-car.php?delete_id=<?php echo $car['CAR_ID']; ?>" class="btn btn-danger">
-                        <i class="glyphicon glyphicon-remove-circle"></i> Delete
-                    </a>
-                </td>
-                <td align="center">
-                    <a href="show-claims.php?car_id=<?php echo $car['CAR_ID']; ?>" class="btn btn-info">
-                        <i class="glyphicon glyphicon-eye-open"></i> Show Claims
-                    </a>
-                </td>
-                
-            </tr>
-            
-                <?php
+                    <tr>
+                        <td><?php echo $car['CAR_ID']; ?></td>
+                        <td><?php echo $car['DRIVER_ID']; ?></td>
+                        <td><?php echo $car['CAR_TYPE']; ?></td>
+                        <td><?php echo $car['RED_CAR']; ?></td>
+                        <td><?php echo $car['CAR_AGE']; ?></td>
+                        
+                    
+                        <td align="center">
+                            <a href="edit-car.php?edit_id=<?php echo $car['CAR_ID']; ?>" class="btn btn-warning">
+                                <i class="glyphicon glyphicon-edit"></i> Edit
+                            </a>
+                        </td>
+                        <td align="center">
+                            <a href="delete-car.php?delete_id=<?php echo $car['CAR_ID']; ?>" class="btn btn-danger">
+                                <i class="glyphicon glyphicon-remove-circle"></i> Delete
+                            </a>
+                        </td>
+
+                        <td align="center">
+                            <a href="show-claim.php?car_id=<?php echo $car['CAR_ID']; ?>" class="btn btn-info">
+                                 Claim
+                            </a>
+                        </td>
+                        
+                    </tr>
+                    <?php    
+                    
+                    
                 }
                 ?>
                 
@@ -72,6 +75,3 @@ include_once 'header.php';
 <i class="glyphicon glyphicon-backward"></i> &nbsp; Back to menu</a>
     
 </div>  
-
-
-<?php include_once 'footer.php'; ?>

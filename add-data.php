@@ -33,7 +33,7 @@ if(isset($_GET['inserted'])){
     ?>
     <div class="container">
 	   <div class="alert alert-warning">
-       Insertion failed!
+       Insertion failed:&lt;
 	   </div>
 	</div>
     <?php

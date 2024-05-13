@@ -79,7 +79,10 @@ include_once 'header.php';
                     <button type="submit" class="btn btn-primary" name="btn-update">
                     <span class="glyphicon glyphicon-edit"></span>  Edit Car
                     </button>
-                    <a href="index.php" class="btn btn-large btn-success" style="float: right;"><i class="glyphicon glyphicon-backward"></i> &nbsp; Cancel </a>
+                    <a href="show-car.php?driver_id=<?php echo $DRIVER_ID; ?>" class="btn btn-large btn-success" style="float: right;">
+                        <i class="glyphicon glyphicon-backward"></i> &nbsp; Cancel
+                    </a>
+
                 </td>
             </tr>
         </table>
