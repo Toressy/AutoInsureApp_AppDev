@@ -63,8 +63,8 @@ include_once 'header.php';
         <?php
     } else {
         ?>
-        <a href="show-claim.php?car_id=<?php echo $claim['CAR_ID']; ?>" class="btn btn-large btn-success" style="float: right;">
-        <i class="glyphicon glyphicon-backward"></i> &nbsp; Back to claim</a>
+        <a href="index.php" class="btn btn-large btn-success" style="float: right;">
+            <i class="glyphicon glyphicon-backward"></i> &nbsp; Back to menu</a>
         <?php
     }
     ?>

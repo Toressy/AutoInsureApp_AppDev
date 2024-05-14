@@ -1,15 +1,12 @@
 <?php
 include_once 'dbconfig.php';
-// Get the driver ID from the URL parameter if available
 $driver_id = isset($_GET['driver_id']) ? $_GET['driver_id'] : '';
-// Handle form submission for adding a car
 if(isset($_POST['btn-save'])){
     $DRIVER_ID = $_POST['DRIVER_ID'];
     $CAR_TYPE = $_POST['CAR_TYPE'];
     $RED_CAR = $_POST['RED_CAR'];
     $CAR_AGE = $_POST['CAR_AGE'];
     
-    // Call the createCar method to insert the car data into the database
     if($crud->createCar($DRIVER_ID, $CAR_TYPE, $RED_CAR, $CAR_AGE)){
         header("Location: add-car.php?inserted&driver_id=$DRIVER_ID");
         exit();
@@ -21,7 +18,6 @@ if(isset($_POST['btn-save'])){
 
 include_once 'header.php';
 
-// Display success or failure message if redirected from the form submission
 if(isset($_GET['inserted'])){
     ?>
     <div class="container">
@@ -46,19 +42,23 @@ if(isset($_GET['inserted'])){
         <table class='table table-bordered'>
             <tr>
                 <td>Driver ID</td>
-                <td><input type='text' name='DRIVER_ID' class='form-control' value="<?php echo isset($_GET['driver_id']) ? $_GET['driver_id'] : ''; ?>" required readonly></td>
+                <td><input type='number' name='DRIVER_ID' class='form-control' value="<?php echo isset($_GET['driver_id']) ? $_GET['driver_id'] : ''; ?>" required readonly></td>
             </tr>
             <tr>
                 <td>Car Type</td>
                 <td><input type='text' name='CAR_TYPE' class='form-control' required></td>
             </tr>
             <tr>
-                <td>Red Car</td>
-                <td><input type='text' name='RED_CAR' class='form-control' required></td>
+                <td>Red?</td>
+                <td>
+                    <label><input type='radio' name='RED_CAR' value='yes' required> yes</label>
+                    <label><input type='radio' name='RED_CAR' value='no' required> no</label>
+                </td>
             </tr>
+            
             <tr>
                 <td>Car Age</td>
-                <td><input type='text' name='CAR_AGE' class='form-control' required></td>
+                <td><input type='number' name='CAR_AGE' class='form-control' required></td>
             </tr>
             <tr>
                 <td colspan="2">

@@ -46,7 +46,7 @@ include_once 'header.php';
         <table class='table table-bordered'>
             <tr>
                 <td>Car ID</td>
-                <td><input type='text' name='CAR_TYPE' class='form-control' value="<?php echo $CAR_ID; ?>" required disabled></td>
+                <td><input type='number' name='CAR_TYPE' class='form-control' value="<?php echo $CAR_ID; ?>" required disabled></td>
             </tr>
     
             <tr>
@@ -56,7 +56,7 @@ include_once 'header.php';
     
             <tr>
                 <td> Total number of claims</td>
-                <td><input type='text' name='CLM_FREQ' class='form-control' value="<?php echo $CLM_FREQ; ?>" required></td>
+                <td><input type='number' name='CLM_FREQ' class='form-control' value="<?php echo $CLM_FREQ; ?>" required></td>
             </tr>
     
             <tr>
@@ -66,7 +66,7 @@ include_once 'header.php';
 
             <tr>
                 <td>Claim indicator</td>
-                <td><input type='text' name='CLAIM_FLAG' class='form-control' value="<?php echo $CLAIM_FLAG; ?>" required></td>
+                <td><input type='number' name='CLAIM_FLAG' class='form-control' value="<?php echo $CLAIM_FLAG; ?>" required></td>
             </tr>
     
             <tr>

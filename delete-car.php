@@ -63,8 +63,8 @@ include_once 'header.php';
         <?php
     } else {
         ?>
-        <a href="show-car.php?driver_id=<?php echo $car['DRIVER_ID']; ?>" class="btn btn-large btn-success" style="float: right;">
-        <i class="glyphicon glyphicon-backward"></i> &nbsp; Back to menu</a>
+        <a href="index.php" class="btn btn-large btn-success" style="float: right;">
+            <i class="glyphicon glyphicon-backward"></i> &nbsp; Back to menu</a>
         <?php
     }
     ?>

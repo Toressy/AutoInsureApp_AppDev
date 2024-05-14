@@ -1,9 +1,10 @@
 <?php
 
+
 $DB_host = "localhost";
 $DB_user = "root";
 $DB_pass = "";
-$DB_name = "insurance";
+$DB_name = "CarInsurance";
 $mysqli = new mysqli($DB_host, $DB_user, $DB_pass, $DB_name);
 
 if ($mysqli->connect_errno) {

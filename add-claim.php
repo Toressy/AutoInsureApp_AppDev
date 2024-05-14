@@ -43,7 +43,7 @@ if(isset($_GET['inserted'])){
         <table class='table table-bordered'>
             <tr>
                 <td>Car ID</td>
-                <td><input type='text' name='CAR_ID' class='form-control' value="<?php echo $car_id; ?>" required readonly></td>
+                <td><input type='number' name='CAR_ID' class='form-control' value="<?php echo $car_id; ?>" required readonly></td>
             </tr>
             <tr>
                 <td>Amount of old claims</td>
@@ -51,7 +51,7 @@ if(isset($_GET['inserted'])){
             </tr>
             <tr>
                 <td>Total number of claims</td>
-                <td><input type='text' name='CLM_FREQ' class='form-control' required></td>
+                <td><input type='number' name='CLM_FREQ' class='form-control' required></td>
             </tr>
             <tr>
                 <td>Claim amount</td>
@@ -59,7 +59,7 @@ if(isset($_GET['inserted'])){
             </tr>
             <tr>
                 <td>Claim indicator</td>
-                <td><input type='text' name='CLAIM_FLAG' class='form-control' required></td>
+                <td><input type='number' name='CLAIM_FLAG' class='form-control' required></td>
             </tr>
             <tr>
                 <td colspan="2">

@@ -48,14 +48,15 @@ include_once 'header.php';
 <div class="container">    
     <form method='post'>
         <table class='table table-bordered'>
+        
             <tr>
                 <td>KIDSDRIVE</td>
-                <td><input type='text' name='KIDSDRIV' class='form-control' value="<?php echo $KIDSDRIV; ?>" required></td>
+                <td><input type='number' name='KIDSDRIV' class='form-control' value="<?php echo $KIDSDRIV; ?>" required></td>
             </tr>
     
             <tr>
                 <td>AGE</td>
-                <td><input type='text' name='AGE' class='form-control' value="<?php echo $AGE; ?>" required></td>
+                <td><input type='number' name='AGE' class='form-control' value="<?php echo $AGE; ?>" required></td>
             </tr>
     
             <tr>
@@ -65,13 +66,25 @@ include_once 'header.php';
     
             <tr>
                 <td>MSTATUS</td>
-                <td><input type='text' name='MSTATUS' class='form-control' value="<?php echo $MSTATUS; ?>" required></td>
+                <td>
+                    <select name='MSTATUS' class='form-control' required>
+                        <option value='Yes' <?php if($MSTATUS == 'Yes') echo 'selected'; ?>>Yes</option>
+                        <option value='No' <?php if($MSTATUS == 'No') echo 'selected'; ?>>No</option>
+                    </select>
+                </td>
             </tr>
 
             <tr>
                 <td>GENDER</td>
-                <td><input type='text' name='GENDER' class='form-control' value="<?php echo $GENDER; ?>" required></td>
+                <td>
+                    <select name='GENDER' class='form-control' required>
+                        <option value='F' <?php if($GENDER == 'F') echo 'selected'; ?>>F</option>
+                        <option value='M' <?php if($GENDER == 'M') echo 'selected'; ?>>M</option>
+                    </select>
+                </td>
             </tr>
+
+
 
             <tr>
                 <td>EDUCATION</td>

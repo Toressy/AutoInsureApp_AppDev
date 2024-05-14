@@ -1,3 +1,23 @@
+<script>
+function formatIncome(input) {
+    // Remove non-numeric characters
+    let income = input.value.replace(/\D/g, '');
+    
+    // Format with dollar sign and commas
+    income = "$" + parseFloat(income).toLocaleString('en-US');
+    
+    // Update input value
+    input.value = income;
+}
+
+function allowOnlyNumbers(event) {
+    // Allow only numbers
+    if (isNaN(event.key)) {
+        event.preventDefault();
+    }
+}
+</script>
+
 <?php
 include_once 'dbconfig.php';
 
@@ -45,24 +65,35 @@ if(isset($_GET['inserted'])){
 	<form method='post'>
     <table class='table table-bordered'>
         <tr>
-            <td>ID</td><td><input type='text' name='DRIVER_ID' class='form-control' required></td>
+            <td>ID</td><td><input type='number' name='DRIVER_ID' class='form-control' required></td>
         </tr>
         <tr>
-            <td>KIDSDRIV</td><td><input type='text' name='KIDSDRIV' class='form-control' required></td>
-        </tr>
-
-        <tr>
-            <td>AGE</td><td><input type='text' name='AGE' class='form-control' required></td>
-        </tr>
-        <tr>
-            <td>INCOME</td><td><input type='text' name='INCOME' class='form-control' required></td>
-        </tr>
-        <tr>
-            <td>MSTATUS</td><td><input type='text' name='MSTATUS' class='form-control' required></td>
+            <td>KIDSDRIV</td><td><input type='number' name='KIDSDRIV' class='form-control' required></td>
         </tr>
 
         <tr>
-            <td>GENDER</td><td><input type='text' name='GENDER' class='form-control' required></td>
+            <td>AGE</td><td><input type='number' name='AGE' class='form-control' required></td>
+        </tr>
+        <tr>
+            <td>INCOME</td>
+            <td><input type='text' name='INCOME' class='form-control' value='$' oninput="formatIncome(this)" onkeypress="allowOnlyNumbers(event)" required></td>
+        </tr>
+        <tr>
+            <td>MSTATUS</td>
+            <td>
+                <label><input type='radio' name='MSTATUS' value='Yes' required> Yes</label>
+                <label><input type='radio' name='MSTATUS' value='No' required> No</label>
+            </td>
+        </tr>
+
+
+       
+        <tr>
+            <td>GENDER</td>
+            <td>
+                <label><input type='radio' name='GENDER' value='F' required> F</label>
+                <label><input type='radio' name='GENDER' value='M' required> M</label>
+            </td>
         </tr>
         <tr>
             <td>EDUCATION</td><td><input type='text' name='EDUCATION' class='form-control' required></td>

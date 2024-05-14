@@ -66,12 +66,18 @@ include_once 'header.php';
     
             <tr>
                 <td>Red Car</td>
-                <td><input type='text' name='RED_CAR' class='form-control' value="<?php echo $RED_CAR; ?>" required></td>
+                <td>
+                    <select name='RED_CAR' class='form-control' required>
+                        <option value='yes' <?php if($RED_CAR == 'yes') echo 'selected'; ?>>yes</option>
+                        <option value='no' <?php if($RED_CAR == 'no') echo 'selected'; ?>>no</option>
+                    </select>
+                </td>
             </tr>
+
     
             <tr>
                 <td>Car Age</td>
-                <td><input type='text' name='CAR_AGE' class='form-control' value="<?php echo $CAR_AGE; ?>" required></td>
+                <td><input type='number' name='CAR_AGE' class='form-control' value="<?php echo $CAR_AGE; ?>" required></td>
             </tr>
     
             <tr>
